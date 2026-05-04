@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatSphere Login Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; background: #4CAF50; color: white; border: none; border-radius: 3px; }
+        button:hover { background: #45a049; }
+        input { padding: 8px; margin: 5px; width: 200px; }
+        .result { margin: 10px 0; padding: 10px; background: #f0f0f0; border-radius: 3px; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>ChatSphere Login System Test</h1>
+
+    <div class="test-section">
+        <h3>Register New User</h3>
+        <input type="text" id="reg-name" placeholder="Full Name" value="Test User"><br>
+        <input type="email" id="reg-email" placeholder="Email" value="test@example.com"><br>
+        <input type="password" id="reg-password" placeholder="Password" value="password123"><br>
+        <button onclick="registerUser()">Register</button>
+        <div id="reg-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Login User</h3>
+        <input type="email" id="login-email" placeholder="Email" value="test@example.com"><br>
+        <input type="password" id="login-password" placeholder="Password" value="password123"><br>
+        <button onclick="loginUser()">Login</button>
+        <div id="login-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Check Current User</h3>
+        <button onclick="checkCurrentUser()">Check Login Status</button>
+        <div id="current-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>View All Users</h3>
+        <button onclick="viewAllUsers()">Show All Users</button>
+        <pre id="users-data"></pre>
+    </div>
+
+    <div class="test-section">
+        <h3>Logout</h3>
+        <button onclick="logoutUser()">Logout</button>
+        <div id="logout-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Clear All Data</h3>
+        <button onclick="clearAllData()" style="background: #f44336;">Clear Everything</button>
+        <div id="clear-result" class="result"></div>
+    </div>
+
+    <script src="chatsphere.js"></script>
+    <script>
+        let userProfile;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            userProfile = new UserProfile();
+        });
+
+        function registerUser() {
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+
+            try {
+                const user = userProfile.register(name, email, password);
+                document.getElementById('reg-result').innerHTML = `<div class="success">✓ Registration successful!<br>Name: ${user.name}<br>Email: ${user.email}</div>`;
+            } catch (error) {
+                document.getElementById('reg-result').innerHTML = `<div class="error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function loginUser() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const user = userProfile.login(email, password);
+                userProfile.setCurrentUser(user);
+                document.getElementById('login-result').innerHTML = `<div class="success">✓ Login successful!<br>Welcome back, ${user.name}!<br>Login count: ${user.loginCount}</div>`;
+            } catch (error) {
+                document.getElementById('login-result').innerHTML = `<div class="error">✗ Error: ${error.message}</div>`;
+            }
+        }
+
+        function checkCurrentUser() {
+            const currentUser = userProfile.getCurrentUser();
+            if (currentUser) {
+                document.getElementById('current-result').innerHTML = `<div class="success">✓ Currently logged in as:<br>${currentUser.name} (${currentUser.email})<br>Last login: ${new Date(currentUser.lastLogin).toLocaleString()}</div>`;
+            } else {
+                document.getElementById('current-result').innerHTML = `<div class="error">✗ No user currently logged in</div>`;
+            }
+        }
+
+        function viewAllUsers() {
+            const users = JSON.parse(localStorage.getItem('chatsphere_users') || '{}');
+            document.getElementById('users-data').textContent = JSON.stringify(users, null, 2);
+        }
+
+        function logoutUser() {
+            userProfile.logout();
+            document.getElementById('logout-result').innerHTML = `<div class="success">✓ User logged out successfully</div>`;
+        }
+
+        function clearAllData() {
+            localStorage.removeItem('chatsphere_users');
+            localStorage.removeItem('chatsphere_current_user');
+            document.getElementById('clear-result').innerHTML = `<div class="success">✓ All data cleared</div>`;
+            document.getElementById('users-data').textContent = '';
+            // Clear all result messages
+            ['reg-result', 'login-result', 'current-result', 'logout-result'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+        }
+    </script>
+</body>
+</html>
+                const userProfile = new UserProfile();
+                const user = userProfile.register(name, email, password);
+                document.getElementById('register-result').innerHTML = '<span style="color: green;">Success: User registered - ' + user.name + '</span>';
+            } catch (error) {
+                document.getElementById('register-result').innerHTML = '<span style="color: red;">Error: ' + error.message + '</span>';
+            }
+        }
+
+        function testLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const userProfile = new UserProfile();
+                const user = userProfile.login(email, password);
+                document.getElementById('login-result').innerHTML = '<span style="color: green;">Success: Logged in as ' + user.name + '</span>';
+            } catch (error) {
+                document.getElementById('login-result').innerHTML = '<span style="color: red;">Error: ' + error.message + '</span>';
+            }
+        }
+
+        function viewUsers() {
+            const users = JSON.parse(localStorage.getItem('chatsphere_users') || '{}');
+            document.getElementById('users-data').textContent = JSON.stringify(users, null, 2);
+        }
+
+        function clearData() {
+            localStorage.removeItem('chatsphere_users');
+            localStorage.removeItem('chatsphere_current_user');
+            document.getElementById('users-data').textContent = 'Data cleared';
+            document.getElementById('register-result').innerHTML = '';
+            document.getElementById('login-result').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

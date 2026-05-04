@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatSphere</title>
+    <link rel="stylesheet" href="chatsphere.css">
+    <script src="chatsphere.js"></script>
+  </head>
+  <body>
+    <!-- Login Modal -->
+    <div id="login-modal" class="login-modal">
+      <div class="login-container">
+        <img class="baground-image" src="bg-1.jpg">
+        <div class="login-header">
+          <h2>Welcome to ChatSphere</h2>
+          <p>Please sign in to continue</p>
+        </div>
+
+        <form id="login-form" class="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+          </div>
+          <button type="submit" class="login-button">Sign In</button>
+          <div class="form-footer">
+            <p>Don't have an account? <a href="#" id="show-register">Register here</a></p>
+          </div>
+        </form>
+
+        <!-- Register Form (hidden by default) -->
+        <form id="register-form" class="login-form hidden">
+          <div class="form-group">
+            <label for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" required>
+          </div>
+          <button type="submit" class="login-button">Register</button>
+          <div class="form-footer">
+            <p>Already have an account? <a href="#" id="show-login">Sign in here</a></p>
+          </div>
+        </form>
+
+        <!-- OTP Form (hidden by default) -->
+        <form id="otp-form" class="login-form hidden">
+          <div class="form-group">
+            <label for="otp">Enter OTP</label>
+            <input type="text" id="otp" required>
+          </div>
+          <button type="submit" class="login-button">Verify OTP</button>
+          <div class="form-footer">
+            <p><a href="#" id="back-to-login">Back to Login</a></p>
+          </div>
+        </form>
+
+        <!-- Reset Password Form (hidden by default) -->
+        <form id="reset-form" class="login-form hidden">
+          <div class="form-group">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" required>
+          </div>
+          <button type="submit" class="login-button">Reset Password</button>
+          <div class="form-footer">
+            <p><a href="#" id="back-to-login2">Back to Login</a></p>
+          </div>
+        </form>
+
+        <div id="login-message" class="login-message"></div>
+      </div>
+    </div>
+
+    <!-- Main ChatSphere App (hidden until login) -->
+    <div id="main-app" class="main-app hidden">
+      <div class="header">
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+        <h1 class="marquee">ChatSphere</h1>
+      </div>
+      <div class="sidebar">
+          <div class="sidebar-item" data-action="profile">
+            <img class="profile-icon" src="user.png">
+            <span class="tooltip">PROFILE</span>
+          </div>
+        <div class="sidebar-item" data-action="notifications">
+          <img class="notifications-icon" src="notification.png">
+           <span class="tooltip">NOTIFICATIONS</span>
+        </div>
+        <div class="sidebar-item" data-action="friends">
+            <img class="friends-icon" src="friends.png">
+            <span class="tooltip">FRIENDS</span>
+        </div>
+        <div class="sidebar-item" data-action="chat">
+          <img class="chat-icon" src="chat box.png">
+          <span class="tooltip">CHAT BOX</span>
+        </div>
+        <div class="sidebar-item" data-action="friends">
+          <img class="friends-icon" src="friends.png">
+          <span class="tooltip">FRIENDS</span>
+        </div>
+        <div class="sidebar-item" data-action="liveChat">
+          <img class="live-chat-icon" src="live chat room.png">
+          <span class="tooltip">LIVE CHAT ROOM</span>
+        </div>
+        <div class="sidebar-item" data-action="help">
+            <img class="settings-icon" src="help.png">
+          <span class="tooltip">HELP</span>
+        </div>
+        <div class="sidebar-item" data-action="settings">
+          <img class="settings-icon" src="settings.png">
+          <span class="tooltip">SETTINGS</span>
+        </div>
+        <div class="sidebar-item" data-action="logout">
+          <img class="settings-icon" src="settings.png">
+          <span class="tooltip">LOGOUT</span>
+        </div>
+      </div>
+      <div class="main-content">
+        <div id="info-panel" class="info-panel">
+          <h2>Welcome to ChatSphere</h2>
+          <p>Click a sidebar button to view profile details, notifications, friends, chat, live chat room, help, or settings information.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
